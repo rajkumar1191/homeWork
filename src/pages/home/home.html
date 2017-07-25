@@ -1,0 +1,5 @@
+<ion-icon name="arrow-round-back" class="backIcon" (click)="navToBack()" *ngIf="visibleBtn"></ion-icon>
+<ion-tabs color="header1">
+  <ion-tab tabTitle="Match Fixtures" [root]="tab1Root" [rootParams]="data"></ion-tab>
+  <ion-tab tabTitle="Results" [root]="tab2Root" [rootParams]="data"></ion-tab>
+</ion-tabs>

@@ -1,0 +1,187 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+$BACKGROUND_TOP: #5199E2;
+$BACKGROUND_BOTTOM: #5199E2;
+$BACKGROUND_TRANSPARENCY: rgba(255,255,255,0.3);
+.background-gradient{
+        background: url('../assets/img/badminton1.png') no-repeat;
+        background-size: cover;
+    }
+
+.item-md.item-input.input-has-focus .item-inner, .item-ios.item-input.input-has-focus .item-inner {
+    border-bottom-color: #dedede;
+    box-shadow: inset 0 -1px 0 0 #dedede;
+    color: #fff;
+}
+.input-has-focus .label-md[stacked], .input-has-focus .label-md[floating], .input-has-focus .label-ios[stacked], .input-has-focus .label-ios[floating] {
+    color: #fff;
+}
+.text-input{
+    color: #fff;
+}
+.scroll-content{
+     background: url('../assets/img/badminton1.png') no-repeat;
+        background-size: cover;
+}
+/* custom icons */
+.ion-md-appointment, 
+.ion-ios-appointment{
+    content: url('../assets/icon/calender.svg');
+    width: auto;
+    height: 30px;
+    padding: 5px 4px 6px;
+}
+.ion-md-locate, 
+.ion-ios-locate{
+    content: url('../assets/icon/locate.svg');
+    width: auto;
+    height: 30px;
+    padding: 5px 4px 6px;
+}
+.ion-md-records, 
+.ion-ios-records{
+    content: url('../assets/icon/service_record.svg');
+    width: auto;
+    height: 30px;
+    padding: 5px 4px 6px;
+}
+.ion-md-maintenance, 
+.ion-ios-maintenance{
+    content: url('../assets/icon/cost_of_main.svg');
+    width: auto;
+    height: 30px;
+    padding: 5px 4px 6px;
+}
+.ion-md-feedback, 
+.ion-ios-feedback{
+    content: url('../assets/icon/user.svg');
+    width: auto;
+    height: 30px;
+    padding: 5px 4px 6px;
+}
+.ion-md-customer, 
+.ion-ios-customer{
+    content: url('../assets/icon/user1.svg');
+    width: auto;
+    height: 30px;
+    padding: 5px 0px 6px;
+}
+.ion-md-remainder, 
+.ion-ios-remainder{
+    content: url('../assets/icon/calender_small.svg');
+    width: auto;
+    height: 30px;
+    padding: 5px 4px 6px;
+}
+.ion-md-alerts, 
+.ion-ios-alerts{
+    content: url('../assets/icon/alert.svg');
+    width: auto;
+    height: 30px;
+    padding: 5px 4px 6px;
+}
+.ion-md-notification, 
+.ion-ios-notification{
+    content: url('../assets/icon/alert.svg');
+    width: auto;
+    height: 24px;
+    padding: 5px 4px 6px;
+    margin-right: 15px;
+}
+.ion-md-logout, 
+.ion-ios-logout{
+    content: url('../assets/icon/logout.svg');
+    width: auto;
+    height: 20px;
+    padding: 5px 4px 6px;
+}
+.ion-md-document, 
+.ion-ios-document{
+    content: url('../assets/icon/document.svg');
+    width: auto;
+    height: 30px;
+    padding: 5px 4px 6px;
+}
+.ion-md-car, 
+.ion-ios-car{
+    content: url('../assets/icon/car.svg');
+    width: auto;
+    height: 30px;
+    padding: 5px 4px 6px;
+}
+.ion-md-dob, 
+.ion-ios-dob{
+    content: url('../assets/icon/dob.svg');
+    width: auto;
+    height: 30px;
+    padding: 5px 0px 6px;
+}
+.ion-md-home, 
+.ion-ios-home{
+    content: url('../assets/icon/home.svg');
+    width: auto;
+    height: 30px;
+    padding: 5px 0px 6px;
+}
+.ion-md-phone, 
+.ion-ios-phone{
+    content: url('../assets/icon/phone.svg');
+    width: auto;
+    height: 30px;
+    padding: 5px 0px 6px;
+}
+.ion-md-email, 
+.ion-ios-email{
+    content: url('../assets/icon/email.svg');
+    width: auto;
+    height: 30px;
+    padding: 5px 0px 6px;
+}
+.ion-md-edit, 
+.ion-ios-edit{
+    content: url('../assets/icon/edit.svg');
+    width: auto;
+    height: 15px;
+    padding: 5px 0px 6px;
+}
+.ion-md-vs, 
+.ion-ios-vs{
+    content: url('../assets/img/badminton.svg');
+    width: auto;
+    height: 30px;
+    padding: 5px 0px 6px;
+}
+.ion-md-whitevs, 
+.ion-ios-whitevs{
+    content: url('../assets/img/badmintonwhite.svg');
+    width: auto;
+    height: 30px;
+    padding: 5px 0px 6px;
+}
+ion-footer{
+    background: #504f4f;
+    color: #fff;
+}
+.list-md, .list-ios {
+    margin: -1px 0 10px 0;
+}
+.team{
+    text-transform: uppercase;
+}
+.list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{
+    border: none;
+}
