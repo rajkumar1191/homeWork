@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.ionicframework.badm802696" version="0.1.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>TBL</name>
-    <description>Tavant Batminton Tournament</description>
+<widget id="com.ionicframework.homework0001" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>HomeWork</name>
+    <description>HomeWork</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
     <access origin="*" />
@@ -26,7 +26,6 @@
     <preference name="AutoHideSplashScreen" value="false" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreenDelay" value="3000" />
-    <preference name="YouTubeDataApiKey" value="AIzaSyA-GsQSx-3T0jLKp2-MIES1dRHrwTQbDDs" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -41,8 +40,6 @@
         <splash density="port-xhdpi" src="resources/android/splash/drawable-port-xhdpi-screen.png" />
         <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
-        <preference name="CodePushDeploymentKey" value="ET8MADrrU7CR6wD9l1oC-DmTtFYx438e133a-f719-4b5a-b7b5-675229a97731" />
-        <preference name="YouTubeDataApiKey" value="AIzaSyA-GsQSx-3T0jLKp2-MIES1dRHrwTQbDDs" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />

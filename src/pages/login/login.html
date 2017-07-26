@@ -1,6 +1,6 @@
 <ion-content no-padding class="background-gradient">
     <span class="banner" (tap)="tapEvent($event)">
-        <img src="assets/img/banner.png"/>      
+        <img src="assets/img/banner.jpg"/>      
         <span class="liveText">
             <h2 text-left *ngIf="!splitMode">{{liveDetails}}</h2>
             <h2 text-left *ngIf="splitMode">
@@ -18,20 +18,39 @@
     </span>
     
     <ion-list class="listPadding" no-padding>
-        <ion-item class="mens" no-lines (click)="loginFunction('m')">
-            <button ion-item text-center>
-                MENS
-            </button> 
-        </ion-item> 
-        <ion-item class="womens"  no-lines (click)="loginFunction('w')">
-            <button ion-item text-center>
-                WOMENS
-            </button> 
-        </ion-item> 
-        <ion-item class="mixed" no-lines (click)="loginFunction('mi')">
-            <button ion-item text-center>
-                MIXED
-            </button> 
-        </ion-item> 
+        <ion-grid>
+            <ion-row>
+                <ion-col col-6>
+                    <ion-item class="homework" no-lines>
+                        <button ion-item text-center>
+                            Home Work
+                        </button> 
+                    </ion-item> 
+                </ion-col>
+                <ion-col col-6>
+                    <ion-item class="events" no-lines>
+                        <button ion-item text-center>
+                            Events
+                        </button> 
+                    </ion-item> 
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-6>
+                    <ion-item class="news" no-lines>
+                        <button ion-item text-center>
+                            News
+                        </button> 
+                    </ion-item> 
+                </ion-col>
+                <ion-col col-6>
+                    <ion-item class="feedback" no-lines>
+                        <button ion-item text-center>
+                            Feedback
+                        </button> 
+                    </ion-item> 
+                </ion-col>
+            </ion-row>
+        </ion-grid>
     </ion-list>
 </ion-content>
