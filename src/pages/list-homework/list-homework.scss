@@ -1,0 +1,63 @@
+page-list-homework {
+    .background-gradient{
+        background: url('../assets/img/badminton1.png') no-repeat;
+        background-size: cover;
+    }
+    .serviceImg{
+        width: 100%;
+    }
+    .title{
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #2F3035;   
+    }
+    .content{
+        font-size: 1.3rem;
+        font-weight: 400;
+    }
+     .arrow-up{
+        width:20px;
+        height:20px;
+        background: url('../assets/icon/arrow_up.svg');
+        background-size: 12px 20px;
+        background-repeat: no-repeat;
+        float: right;
+    }
+    .arrow-right{
+        width:20px;
+        height:20px;
+        background: url('../assets/icon/arrow_right.svg');
+        background-size: 12px 20px;
+        background-repeat: no-repeat;
+        float: right;
+    }
+    .grid{
+        padding: 0;
+    }
+    .rowBackgroundWithBorder{
+        background: #FAFAFA;
+        border-bottom: 1px solid #dad6d6;
+        border-top: 1px solid #dad6d6;
+    }
+    .rowBackground{
+        background: #FAFAFA;
+    }
+    ion-slides {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    .swiper-pagination
+    {
+        background:rgba(224, 220, 220, 0.5)
+    }
+    .time{
+        font-weight: bolder;
+
+    }
+    .group{
+        font-style: italic;
+        font-size: 1.2rem;
+        font-weight: bolder;        
+    }
+}

@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
-import { Platform, IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage,Platform, NavController, NavParams, MenuController } from 'ionic-angular';
 import { Home } from '../home/home';
-import { Landing } from '../landing/landing';
-import { LiveDataService } from './live.service';
-import {ApplicationRef} from '@angular/core';
-import { CodePush } from '@ionic-native/code-push';
-
-declare const codePush: CodePush;
 /**
  * Generated class for the Login page.
  *
@@ -35,51 +29,15 @@ export class Login {
   score2 = "";
   public tap: number = 0;
   isUpdateAvailable:boolean = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public liveDataService: LiveDataService, private platform: Platform) {
-        this.matchDetails = navParams.get('matchDetails');
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, private platform: Platform) {
         this.menuCtrl.enable(true);
-        this.platform.ready().then(() => {
-            codePush.sync().subscribe((syncStatus) => console.log(syncStatus));
-            const downloadProgress = (progress) => { console.log(`Downloaded ${progress.receivedBytes} of ${progress.totalBytes}`); }
-            codePush.sync({}, downloadProgress).subscribe((syncStatus) => console.log(syncStatus));
-        });
   }
   
   ngOnDestroy()
   {
-        if(this.myHttpSubscription != null)
-        {
-            // this.loading.dismiss();
-            this.myHttpSubscription.unsubscribe();
-        }
+
   }        
   ionViewDidLoad() {
-    this.myHttpSubscription = setInterval(() => {
-        this.myHttpSubscription = this.liveDataService.getMatchDetails().subscribe(matchDetailsResponse =>
-            {
-              
-                let liveDetailsResponse = matchDetailsResponse.text; 
-                var liveDetails = (liveDetailsResponse).split("~");
-                
-                if(liveDetails[1]){
-                  this.splitMode = true;
-                  this.team1 = liveDetails[0];
-                  this.score1 = liveDetails[1];                  
-                  this.team2 = liveDetails[2];
-                  this.score2 = liveDetails[3];
-                  console.log("split is there")
-                }
-                else
-                {
-                  this.liveDetails = liveDetailsResponse;
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.error = "Internal error, please try after sometime";
-            }); 
-      }, 10000);
-    
   }
   // tapEvent(e) {
   //   this.tap++
@@ -88,21 +46,25 @@ export class Login {
   //     this.navCtrl.push(Landing);
   //   }
   // }
-  loginFunction(m)
+  pageNav(m)
   {
     let data='';
-    if(m =='m')
+    if(m =='h')
     {
-      data='Mens';
+      data='Home Work';
     }
-    else if(m =='w')
+    else if(m =='e')
     {
-      data='Womens';
+      data='Events';
+    }
+    else if(m =='n')
+    {
+      data='News';
     }
     else{
-      data='Mixed';
+      data='Feedback';
     }
     console.log(data);
-    this.navCtrl.push(Home,{matchDetails:this.matchDetails, data:data})
+    this.navCtrl.push(Home,{data:data})
   }
 }
