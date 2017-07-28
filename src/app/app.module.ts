@@ -11,11 +11,11 @@ import { AddHomework } from '../pages/add-homework/add-homework';
 import { Landing } from '../pages/landing/landing';
 import { ListHomework } from '../pages/list-homework/list-homework';
 import { MatchService } from '../pages/home/home.service';
-import { MatchResultService } from '../pages/list-homework/list-homework.service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { AsDbservice } from '../providers/as-dbservice';
 
 @NgModule({
   declarations: [
@@ -60,8 +60,8 @@ import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
     StatusBar,
     SplashScreen,
     MatchService,
-    MatchResultService,
     IonicNativePlugin,
+    AsDbservice,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

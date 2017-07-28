@@ -22,17 +22,17 @@ $BACKGROUND_TRANSPARENCY: rgba(255,255,255,0.3);
         background-size: cover;
     }
 
-.item-md.item-input.input-has-focus .item-inner, .item-ios.item-input.input-has-focus .item-inner {
-    border-bottom-color: #dedede;
-    box-shadow: inset 0 -1px 0 0 #dedede;
-    color: #fff;
-}
-.input-has-focus .label-md[stacked], .input-has-focus .label-md[floating], .input-has-focus .label-ios[stacked], .input-has-focus .label-ios[floating] {
-    color: #fff;
-}
-.text-input{
-    color: #fff;
-}
+// .item-md.item-input.input-has-focus .item-inner, .item-ios.item-input.input-has-focus .item-inner {
+//     border-bottom-color: #dedede;
+//     box-shadow: inset 0 -1px 0 0 #dedede;
+//     color: #000;
+// }
+// .input-has-focus .label-md[stacked], .input-has-focus .label-md[floating], .input-has-focus .label-ios[stacked], .input-has-focus .label-ios[floating] {
+//     color: #fff;
+// }
+// .text-input{
+//     color: #fff;
+// }
 .scroll-content{
     //  background: url('../assets/img/badminton1.png') no-repeat;
         background-size: cover;
@@ -184,4 +184,51 @@ ion-footer{
 }
 .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{
     border: none;
+}
+.select-control{
+    .item{
+        border-color: #f6f7fb;
+        background: #f6f7fb;
+    }
+    ion-label{
+        color:#8A8A8A;
+    }
+    .item-label-stacked{
+        ion-select{
+            font-size: 1.5rem;
+            padding-bottom: 0;
+            color: #575757;
+            font-weight: 600;
+        }
+    }
+    margin:10px 0;
+}
+.form-control{
+    position: relative;
+    .label{
+        font-size: 1.2rem;
+        color:#8A8A8A;
+        text-align: left;
+        margin-bottom: 4px;
+    }
+    ion-label{
+        font-size: 1.45rem;
+        color:#8A8A8A;
+    }
+    margin:10px 0;
+    .item-label-floating,.item-label-stacked{
+        &.input-has-focus,&.input-has-value
+        {
+            ion-label{
+                color:#8A8A8A;
+            }
+        }
+        .text-input{
+            margin-bottom:4px;
+        }
+    }
+}
+form{
+    height: 100%;
+    padding: 5px;
 }

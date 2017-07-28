@@ -6,54 +6,61 @@
       <ion-title text-center *ngIf="data=='Feedback'">Feedback</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content no-padding class="background-gradient">
-  <ion-list>
-    <ion-item>
-      <ion-label stacked>Select Date</ion-label>
-      <ion-select [(ngModel)]="selectedDate">
-        <ion-option *ngFor="let fixtures of matchDateDetails let i=index" [selected]="selectedDate == fixtures.date" [value]="fixtures.date">{{fixtures.dateStr}}</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  <div *ngFor="let fixtures1 of matchDateDetails " text-wrap>    
-    <div class="div-container" [hidden]="selectedDate != fixtures1.date">
-      <span *ngFor="let fixture of fixtures1.matches let i=index">
-        <ion-list (click)="toggleGroup(i)" *ngIf="data=='Mens' ? fixture.groupMatches.categories[0].matches.length > 0 : (data=='Womens' ? fixture.groupMatches.categories[1].matches.length > 0 : fixture.groupMatches.categories[2].matches.length > 0)">
-          <ion-item [color]="fixture.Group == 'Group A'? 'vari1' : (fixture.Group == 'Group B'? 'vari2' : (fixture.Group == 'Group C'? 'vari3' : (fixture.Group == 'Group D'? 'vari4' : (fixture.Group == 'Group E'? 'vari5' : (fixture.Group == 'Group F'? 'vari6' : (fixture.Group == 'Group G'? 'vari7' : 'vari8' ))))))" >
-            <ion-row>
-              <ion-col col-12 text-left class="time"><h2 text-left>{{fixture.Group}}</h2></ion-col>
-            </ion-row>
-          </ion-item>
-        </ion-list>
-        <span *ngFor="let category of fixture.groupMatches.categories">
-          <span *ngFor="let match of category.matches">
-            <ion-card no-padding  [hidden]="!isGroupShown(i)" color="vari2" *ngIf="data==category.category" [color]="fixture.Group == 'Group A'? 'vari1' : (fixture.Group == 'Group B'? 'vari2' : (fixture.Group == 'Group C'? 'vari3' : (fixture.Group == 'Group D'? 'vari4' : (fixture.Group == 'Group E'? 'vari5' : (fixture.Group == 'Group F'? 'vari6' : (fixture.Group == 'Group G'? 'vari7' : 'vari8' ))))))">
-                <ion-card-content no-padding>
-                  <ion-grid>
-                    <ion-row>
-                      <ion-col class="time" col-12 text-left>Time: {{match.Time}}</ion-col>                
-                      <ion-col class="team" col-12 text-center>{{match.Team1}}</ion-col>
-                      <ion-col col-12  text-center><ion-icon name="whitevs" color="gold1"></ion-icon></ion-col>
-                      <ion-col class="team" col-12 text-center>{{match.Team2}}</ion-col>
-                      <ion-col col-12 text-right class="group"></ion-col>
-                    </ion-row>
-                  </ion-grid>
-                </ion-card-content>
-              </ion-card>
-          </span>
-        </span>
-      </span>
-    </div>
-    <div [hidden]="selectedDate != fixtures1.date">
-      <ion-list *ngIf="data=='Mens' ? fixtures1.mencount == 0 : (data=='Womens' ? fixtures1.womencount == 0 : fixtures1.mixedcount == 0)">
-          <ion-item color="header">
-            <ion-row>
-              <ion-col col-12 text-left class="time"><h2 text-left>No matches</h2></ion-col>
-            </ion-row>
-          </ion-item>
-        </ion-list>
-    </div>
-  </div>
+<ion-content padding class="background-gradient">
+  <form [formGroup]="homeworkForm">
+    <ion-list>
+      <ion-item padding>
+          <ion-label stacked>Select Date</ion-label>
+          <ion-datetime displayFormat="MMM DD YYYY" formControlName="dateSelect" pickerFormat="DD MMM YYYY"></ion-datetime>
+      </ion-item>
+      <ion-item padding>
+          <ion-label class='label' stacked>Class</ion-label>
+          <ion-select formControlName="className">
+              <ion-option>I</ion-option>
+              <ion-option>II</ion-option>
+              <ion-option>III</ion-option>
+              <ion-option>IV</ion-option>
+              <ion-option>V</ion-option>
+              <ion-option>VI</ion-option>
+              <ion-option>VII</ion-option>
+              <ion-option>VIII</ion-option>
+              <ion-option>IX</ion-option>
+              <ion-option>X</ion-option>
+              <ion-option>XI</ion-option>
+              <ion-option>XII</ion-option>
+          </ion-select>
+      </ion-item>
+      <ion-item padding>
+          <ion-label class='label' stacked>Staff Name</ion-label>
+          <ion-select formControlName="staffName">
+              <ion-option>Raj</ion-option>
+              <ion-option>Naveen</ion-option>
+              <ion-option>Surya</ion-option>
+              <ion-option>Muthu</ion-option>
+              <ion-option>Adhi</ion-option>
+          </ion-select>
+      </ion-item>
+      <ion-item padding>
+          <ion-label class='label' stacked>Subject Name</ion-label>
+          <ion-select formControlName="subjectName">
+              <ion-option>English</ion-option>
+              <ion-option>Maths</ion-option>
+              <ion-option>Tamil</ion-option>
+              <ion-option>Science</ion-option>
+              <ion-option>Social</ion-option>
+          </ion-select>
+      </ion-item>
+      <ion-item padding>
+          <ion-label stacked>Detail</ion-label>
+          <ion-textarea type="text" formControlName="descrip"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <button type="submit" class="footerBtn right submit" ion-button icon-right full (click)="submit();">
+            SUBMIT
+        </button>
+      </ion-item>
+    </ion-list>
+  </form>
 </ion-content>
 <ion-footer text-center>
   <ion-grid>

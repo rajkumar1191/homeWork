@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage,Platform, NavController, NavParams, MenuController } from 'ionic-angular';
+import { Platform, NavController, NavParams, MenuController } from 'ionic-angular';
 import { Home } from '../home/home';
+import { AsDbservice } from '../../providers/as-dbservice';
+
 /**
  * Generated class for the Login page.
  *
@@ -29,8 +31,9 @@ export class Login {
   score2 = "";
   public tap: number = 0;
   isUpdateAvailable:boolean = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, private platform: Platform) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, private platform: Platform, public asDbservice: AsDbservice) {
         this.menuCtrl.enable(true);
+        this.asDbservice.initializeDataService();
   }
   
   ngOnDestroy()
