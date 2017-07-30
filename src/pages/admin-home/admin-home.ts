@@ -12,16 +12,15 @@ import { Storage } from '@ionic/storage';
  * on Ionic pages and navigation.
  */
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html',
+  selector: 'page-admin-home',
+  templateUrl: 'admin-home.html',
 })
-export class Home {
+export class AdminHome {
   tab2Root = ListHomework;
   tab1Root = AddHomework;
   tab3Root = Landing;
   error: any;
   data:any;
-  data1:any;
   matchDetails : any;
   errorMessage:any;
   myHttpSubscription = null;

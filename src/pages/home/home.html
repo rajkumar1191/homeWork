@@ -1,16 +1,13 @@
 <ion-icon name="arrow-round-back" class="backIcon" (click)="navToBack()" *ngIf="visibleBtn"></ion-icon>
-<ion-tabs color="header1" *ngIf="data === 'Home Work'">
-  <ion-tab tabTitle="Add Homework" [root]="tab1Root" [rootParams]="data"></ion-tab>
-  <ion-tab tabTitle="List Homework" [root]="tab2Root" [rootParams]="data"></ion-tab>
+<ion-tabs color="header1" *ngIf="data === 'uHome Work'">
+  <ion-tab tabTitle="Homework" [root]="tab2Root" [rootParams]="data"></ion-tab>
 </ion-tabs>
-<ion-tabs color="header1" *ngIf="data === 'Events'">
-  <ion-tab tabTitle="Add Events" [root]="tab1Root" [rootParams]="data"></ion-tab>
-  <ion-tab tabTitle="List Events" [root]="tab2Root" [rootParams]="data"></ion-tab>
+<ion-tabs color="header1" *ngIf="data === 'uEvents'">
+  <ion-tab tabTitle="Events" [root]="tab2Root" [rootParams]="data"></ion-tab>
 </ion-tabs>
-<ion-tabs color="header1" *ngIf="data === 'News'">
-  <ion-tab tabTitle="Add News" [root]="tab1Root" [rootParams]="data"></ion-tab>
-  <ion-tab tabTitle="List News" [root]="tab2Root" [rootParams]="data"></ion-tab>
+<ion-tabs color="header1" *ngIf="data === 'uNews'">
+  <ion-tab tabTitle="News" [root]="tab2Root" [rootParams]="data"></ion-tab>
 </ion-tabs>
-<ion-tabs color="header1" *ngIf="data === 'Feedback'">
-  <ion-tab tabTitle="List Feedback" [root]="tab2Root" [rootParams]="data"></ion-tab>
+<ion-tabs color="header1" *ngIf="data === 'FeedbackForm'">
+  <ion-tab tabTitle="Feedback" [root]="tab2Root" [rootParams]="data"></ion-tab>
 </ion-tabs>

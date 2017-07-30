@@ -7,48 +7,162 @@
   </ion-toolbar>
 </ion-header>
 <ion-content no-padding class="background-gradient">
-   <form [formGroup]="presetForm">
-      <div class="select-control">
-          <ion-item no-padding>
-              <ion-label class='label' stacked>Name</ion-label>
-              <ion-select formControlName="noOfUnits">
-                  <ion-option [value]="1">1</ion-option>
-                  <ion-option [value]="2">2</ion-option>
-                  <ion-option [value]="3">3</ion-option>
-                  <ion-option [value]="4">4</ion-option>
-                  <ion-option [value]="5">5</ion-option>
-              </ion-select>
-          </ion-item>
-      </div>
-      <ion-input type='hidden' (focus)="onFocus($event)" class="hiddenInput"></ion-input>
-      <div class="form-control input-text-box">
-          <ion-item class="itemborder loanInfo" no-padding>
-              <ion-label stacked>Lender MP #</ion-label>
-              <ion-input type="text" formControlName="lenderMP" maxLength="10"  ></ion-input>
-          </ion-item>
-      </div>
-      <div class="form-control input-text-box">
-          <ion-item class="itemborder loanInfo" no-padding>
-              <ion-label stacked>Detail</ion-label>
-              <ion-input type="text" formControlName="presetName" maxLength="30"  ></ion-input>
-          </ion-item>
-      </div>
-      <div class="form-control input-text-box" [hidden]="true">
-          <ion-item class="itemborder loanInfo" no-padding>
-              <ion-input type="text" formControlName="rowid" ></ion-input>
-          </ion-item>
-      </div>
+    <ion-list *ngIf="data=='Home Work'">
+      <ion-item-sliding *ngFor="let data of homeworkArray">
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-4 class="dateClass">{{data.dateSelect}}</ion-col>
+              <ion-col col-4 class="subjectClass">{{data.subjectName}}</ion-col>
+              <ion-col col-4 class="dateClass">Class - {{data.className}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>{{data.descrip}}</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="primary">
+            <ion-icon name="trash"></ion-icon>
+            Delete
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    <ion-list *ngIf="data=='Events'">
+      <ion-item-sliding *ngFor="let data of eventsArray">
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-4 class="dateClass">{{data.startDate}}</ion-col>
+              <ion-col col-8 class="dateClass">{{data.endDate}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12 class="dateClass">Event Name - {{data.eventTitle}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>{{data.descrip}}</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="primary">
+            <ion-icon name="trash"></ion-icon>
+            Delete
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    <ion-list *ngIf="data=='News'">
+      <ion-item-sliding *ngFor="let data of newsArray">
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-4 class="dateClass">{{data.dateSelect}}</ion-col>
+              <ion-col col-8 class="subjectClass">{{data.newsTitle}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>{{data.descrip}}</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="primary">
+            <ion-icon name="trash"></ion-icon>
+            Delete
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    <ion-list *ngIf="data=='uHome Work'">
+      <ion-card *ngFor="let data of homeworkArray">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-4 class="dateClass">{{data.dateSelect}}</ion-col>
+              <ion-col col-4 class="subjectClass">{{data.subjectName}}</ion-col>
+              <ion-col col-4 class="dateClass">Class - {{data.className}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>{{data.descrip}}</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+    <ion-list *ngIf="data=='uEvents'">
+      <ion-card *ngFor="let data of eventsArray">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-4 class="dateClass">{{data.startDate}}</ion-col>
+              <ion-col col-8 class="dateClass">{{data.endDate}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12 class="dateClass">Event Name - {{data.eventTitle}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>{{data.descrip}}</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+    <ion-list *ngIf="data=='uNews'">
+      <ion-card *ngFor="let data of newsArray">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-4 class="dateClass">{{data.dateSelect}}</ion-col>
+              <ion-col col-8 class="subjectClass">{{data.newsTitle}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>{{data.descrip}}</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+    <ion-list *ngIf="data=='Feedback'">
+      <ion-item-sliding *ngFor="let data of feedbackArray">
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-4 class="dateClass">{{data.dateSelect}}</ion-col>
+              <ion-col col-8 class="subjectClass">{{data.title}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>{{data.descrip}}</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="primary">
+            <ion-icon name="trash"></ion-icon>
+            Delete
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    <form [formGroup]="feedbacForm" *ngIf="data=='FeedbackForm'">
+    <ion-list>
+      <ion-item padding>
+          <ion-label stacked>Select Date</ion-label>
+          <ion-datetime displayFormat="MMM DD YYYY" formControlName="dateSelect" pickerFormat="DD MMM YYYY"></ion-datetime>
+      </ion-item>
+      <ion-item padding>
+          <ion-label class='label' stacked>Title</ion-label>
+          <ion-input type="text" formControlName="feedTitle"></ion-input>
+      </ion-item>
+      <ion-item padding>
+          <ion-label stacked>Detail</ion-label>
+          <ion-textarea type="text" formControlName="descrip"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <button type="submit" class="footerBtn right submit" ion-button icon-right full (click)="submitFeedback();">
+            SUBMIT
+        </button>
+      </ion-item>
+    </ion-list>
   </form>
 </ion-content>
-<ion-footer text-center>
-  <ion-grid>
-    <ion-row>
-      <ion-col text-left col-9>
-          powered by - <ion-icon name="ionic" color="header"></ion-icon> Ionic Framework
-      </ion-col>
-      <ion-col text-right col-3>
-        Mobile CoE 
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-footer>

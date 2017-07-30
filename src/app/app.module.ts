@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 import { Login } from '../pages/login/login';
 import { Home } from '../pages/home/home';
+import { AdminHome } from '../pages/admin-home/admin-home';
 import {  HttpModule } from '@angular/http';
 import { IonicNativePlugin } from '@ionic-native/core';
 import { AddHomework } from '../pages/add-homework/add-homework';
@@ -21,6 +22,7 @@ import { AsDbservice } from '../providers/as-dbservice';
   declarations: [
     MyApp,
     Home,
+    AdminHome,
     Login,
     AddHomework,
     Landing,
@@ -51,6 +53,7 @@ import { AsDbservice } from '../providers/as-dbservice';
   entryComponents: [
     MyApp,
     Home,
+    AdminHome,
     Login,
     AddHomework,
     Landing,

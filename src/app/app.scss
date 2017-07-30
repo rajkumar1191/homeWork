@@ -37,6 +37,13 @@ $BACKGROUND_TRANSPARENCY: rgba(255,255,255,0.3);
     //  background: url('../assets/img/badminton1.png') no-repeat;
         background-size: cover;
 }
+.card-content-md, .card-content-ios {
+    padding: 13px 16px 13px 16px;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    border-bottom: 5px solid #5199e2;
+}
+
 /* custom icons */
 .ion-md-appointment, 
 .ion-ios-appointment{

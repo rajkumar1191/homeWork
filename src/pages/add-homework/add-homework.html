@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding class="background-gradient">
-  <form [formGroup]="homeworkForm">
+  <form [formGroup]="homeworkForm" *ngIf="data=='Home Work'">
     <ion-list>
       <ion-item padding>
           <ion-label stacked>Select Date</ion-label>
@@ -61,16 +61,51 @@
       </ion-item>
     </ion-list>
   </form>
+  <form [formGroup]="eventsForm" *ngIf="data=='Events'">
+    <ion-list>
+      <ion-item padding>
+          <ion-label stacked>Start Date</ion-label>
+          <ion-datetime displayFormat="MMM DD YYYY" formControlName="startDate" pickerFormat="DD MMM YYYY"></ion-datetime>
+      </ion-item>
+      <ion-item padding>
+          <ion-label stacked>End Date</ion-label>
+          <ion-datetime displayFormat="MMM DD YYYY" formControlName="endDate" pickerFormat="DD MMM YYYY"></ion-datetime>
+      </ion-item>
+      <ion-item padding>
+          <ion-label class='label' stacked>Title</ion-label>
+          <ion-input type="text" formControlName="eventTitle"></ion-input>
+      </ion-item>
+      <ion-item padding>
+          <ion-label stacked>Detail</ion-label>
+          <ion-textarea type="text" formControlName="descrip"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <button type="submit" class="footerBtn right submit" ion-button icon-right full (click)="submitEvent();">
+            SUBMIT
+        </button>
+      </ion-item>
+    </ion-list>
+  </form>
+  <form [formGroup]="newsForm" *ngIf="data=='News'">
+    <ion-list>
+      <ion-item padding>
+          <ion-label stacked>Select Date</ion-label>
+          <ion-datetime displayFormat="MMM DD YYYY" formControlName="dateSelect" pickerFormat="DD MMM YYYY"></ion-datetime>
+      </ion-item>
+      <ion-item padding>
+          <ion-label class='label' stacked>Title</ion-label>
+          <ion-input type="text" formControlName="newsTitle"></ion-input>
+      </ion-item>
+      <ion-item padding>
+          <ion-label stacked>Detail</ion-label>
+          <ion-textarea type="text" formControlName="descrip"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <button type="submit" class="footerBtn right submit" ion-button icon-right full (click)="submitNews();">
+            SUBMIT
+        </button>
+      </ion-item>
+    </ion-list>
+  </form>
+
 </ion-content>
-<ion-footer text-center>
-  <ion-grid>
-    <ion-row>
-      <ion-col text-left col-9>
-          powered by - <ion-icon name="ionic" color="header"></ion-icon> Ionic Framework
-      </ion-col>
-      <ion-col text-right col-3>
-        Mobile CoE 
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-footer>

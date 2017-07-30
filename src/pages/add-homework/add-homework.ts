@@ -15,6 +15,8 @@ declare var Connection: any;
 })
 export class AddHomework {
     homeworkForm: FormGroup;
+    eventsForm: FormGroup;
+    newsForm: FormGroup;
     backdrop = true;
     data: any = '';
     shownGroup = null;
@@ -28,6 +30,7 @@ export class AddHomework {
     date: any;
     selectedDate = '';
     dbserviceresult: any;
+    homeWorkArray = [];
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public matchService: MatchService, public menuCtrl: MenuController, public loadingCtrl: LoadingController, public toastCtrl: ToastController, private platform: Platform, public formBuilder: FormBuilder, public asDbservice: AsDbservice) {
         this.data = navParams.data;
@@ -45,6 +48,21 @@ export class AddHomework {
                 subjectName: new FormControl(),
                 descrip: new FormControl('', [<any>Validators.required])
             });
+            this.eventsForm = new FormGroup(
+            {
+                rowid: new FormControl(),
+                startDate: new FormControl(),
+                endDate: new FormControl(),
+                eventTitle: new FormControl(),
+                descrip: new FormControl('', [<any>Validators.required])
+            });
+            this.newsForm = new FormGroup(
+            {
+                rowid: new FormControl(),
+                dateSelect: new FormControl(),
+                newsTitle: new FormControl(),
+                descrip: new FormControl('', [<any>Validators.required])
+            });
     }
 
     matchDetailsResponse: any;
@@ -53,38 +71,12 @@ export class AddHomework {
     matchDateDetails1: any;
 
     ionViewDidLoad() {
-
-        // this.myHttpSubscription = this.matchService.getMatchDetails().subscribe(matchDetailsResponse =>
-        //   {
-        //       this.loading.dismiss();          
-        //       this.matchDateDetails = matchDetailsResponse; 
-        //       this.storage.set('matchDetailsResponse', this.matchDateDetails);
-        //       if((this.matchDateDetails.BadmintonApp != undefined) || (this.matchDateDetails.BadmintonApp != null))
-        //       {
-        //         this.matchDateDetails = this.matchService.matchDateDetails;
-
-        //       }
-        //       else if(this.matchDateDetails.length > 0)
-        //       {
-        //           this.matchDateDetails = this.matchDateDetails;
-        //           this.storage.get('matchDetailsResponse').then((val) => {
-        //             console.log('Your age is', val);
-        //           });
-        //       }
-        //       else
-        //       {
-        //           this.matchDateDetails = this.matchService.matchDateDetails;
-        //           this.storage.get('matchDetailsResponse').then((val) => {
-        //             console.log('Your age is', val);
-        //           });
-        //       }
-        //   },
-        //   error => {
-        //       this.errorMessage = <any>error;
-        //       this.error = "Internal error, please try after sometime";
-        //       this.loading.dismiss();
-
-        //   });
+        this.homeWorkArray = [
+            {"dateSelect":"2017-09-01","className":"I","staffName":"Naveen","subjectName":"English","descrip":"Write A-Z 2 times"},
+            {"dateSelect":"2017-08-01","className":"I","staffName":"Raj","subjectName":"Science","descrip":"Study for tomorrow test"},
+            {"dateSelect":"2017-08-01","className":"I","staffName":"Surya","subjectName":"Maths","descrip":"Study for tomorrow test"},
+            {"dateSelect":"2017-08-01","className":"II","staffName":"Surya","subjectName":"Social","descrip":"Study for tomorrow test"}
+        ]
     }
     submit() {
         let homeworkInsertData = {};
@@ -93,11 +85,74 @@ export class AddHomework {
         homeworkInsertData['staffName'] = this.homeworkForm.controls['staffName'].value;
         homeworkInsertData['subjectName'] = this.homeworkForm.controls['subjectName'].value;
         homeworkInsertData['descrip'] = this.homeworkForm.controls['descrip'].value;
-        this.asDbservice.addHomework(homeworkInsertData).then((messageDetails) => {
-            console.log(messageDetails);
-        }, (error) => {
-            console.log(error);            
-        });
+
+
+
+         if(this.homeworkForm.controls['dateSelect'].status == 'valid' && this.homeworkForm.controls['className'].status == 'valid' && this.homeworkForm.controls['staffName'].status == 'valid' && this.homeworkForm.controls['subjectName'].status == 'valid' && this.homeworkForm.controls['descrip'].status == 'valid')
+        {
+            //this.homeWorkArray.push(homeworkInsertData);
+            //console.log(JSON.stringify(this.homeWorkArray));
+            let toast = this.toastCtrl.create({
+                message: 'Added Successfully',
+                duration: 3000,
+                position: 'bottom'
+            });
+            toast.present();
+        }
+        // this.asDbservice.addHomework(homeworkInsertData).then((messageDetails) => {
+        //    console.log(messageDetails);
+        //}, (error) => {
+        //    console.log(error);            
+        // });
+    }
+    submitNews() {
+        let newsInsertData = {};
+        newsInsertData['dateSelect'] = this.newsForm.controls['dateSelect'].value;
+        newsInsertData['newsTitle'] = this.newsForm.controls['newsTitle'].value;
+        newsInsertData['descrip'] = this.newsForm.controls['descrip'].value;
+
+
+
+        if(this.newsForm.controls['dateSelect'].status == 'valid' && this.newsForm.controls['newsTitle'].status == 'valid' && this.newsForm.controls['descrip'].status == 'valid')
+        {
+            //this.homeWorkArray.push(homeworkInsertData);
+            //console.log(JSON.stringify(this.homeWorkArray));
+            let toast = this.toastCtrl.create({
+                message: 'Added Successfully',
+                duration: 3000,
+                position: 'bottom'
+            });
+            toast.present();
+        }
+        // this.asDbservice.addHomework(homeworkInsertData).then((messageDetails) => {
+        //    console.log(messageDetails);
+        //}, (error) => {
+        //    console.log(error);            
+        // });
+    }
+    submitEvent() {
+        let eventsInsertData = {};
+        eventsInsertData['startDate'] = this.eventsForm.controls['startDate'].value;
+        eventsInsertData['endDate'] = this.eventsForm.controls['endDate'].value;
+        eventsInsertData['eventTitle'] = this.homeworkForm.controls['eventTitle'].value;
+        eventsInsertData['descrip'] = this.homeworkForm.controls['descrip'].value;
+
+        if(this.eventsForm.controls['startDate'].status == 'valid' && this.eventsForm.controls['endDate'].status == 'valid' && this.eventsForm.controls['eventTitle'].status == 'valid' && this.eventsForm.controls['descrip'].status == 'valid')
+        {
+            //this.homeWorkArray.push(homeworkInsertData);
+            //console.log(JSON.stringify(this.homeWorkArray));
+            let toast = this.toastCtrl.create({
+                message: 'Added Successfully',
+                duration: 3000,
+                position: 'bottom'
+            });
+            toast.present();
+        }
+        // this.asDbservice.addHomework(homeworkInsertData).then((messageDetails) => {
+        //    console.log(messageDetails);
+        //}, (error) => {
+        //    console.log(error);            
+        // });
     }
 
 }

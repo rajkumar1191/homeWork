@@ -1,0 +1,88 @@
+page-admin-home {
+     .tabs-ios-header1 .tab-button[aria-selected=true], .tabs-ios-header1 .tab-button[aria-selected=true] .tab-button-icon {
+        color: #fff;
+        border-bottom: 3px solid #fff;
+        margin: 0 5px;
+    }
+    .tabs-md-header1 .tab-button[aria-selected=true], .tabs-md-header1 .tab-button[aria-selected=true] .tab-button-icon {
+        color: #fff;
+        border-bottom: 3px solid #fff;
+        margin: 0 5px;
+    }
+    .tabs[tabsPlacement=top] .tabbar {
+        border-top: 0;
+        border-bottom: transparent;
+    }
+    .scroll-content {
+        background: transparent;
+    }
+    .header-ios .toolbar-background-ios, .footer-ios .toolbar-background-ios {
+        border-style: solid;
+        border-color: transparent;
+    }
+    .header-md .toolbar-background-md, .footer-md .toolbar-background-md {
+        border-style: solid;
+        border-color: transparent;
+    }
+     button[ion-fab] {
+        overflow: visible;
+        position: relative;
+
+        ion-label {
+            position: absolute;
+            top: -8px;
+            right: 40px;
+            color: white;
+            background-color: rgba(0,0,0,0.7);
+            line-height: 24px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            z-index: 100;
+            overflow: visible
+        }
+    }
+
+    .backIcon{
+        position: absolute;
+        width: 25px;
+        top: 10px;
+        z-index: 11;
+        left: 10px;
+        font-size: 2.2em;
+        color: #fff;
+    }
+    .col
+    {
+        .button {
+            margin: 0.4rem 0.2rem;
+            padding: 0 1em;
+            height: 2em;
+            border-radius: 4px;
+            font-size: 1.3rem;
+            color: #fff;
+        }
+    }
+    .lbl{
+        font-size: 1.3rem;
+        color: #7A7E89;
+        font-weight: 400;
+        margin-top: 5px;       
+        padding: 5px 0;         
+    }
+    .val{
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #2F3035;            
+        padding: 5px 0;
+    }
+    .active{
+        background-color: rgba(0,0,0,0.7);
+        z-index: 100;
+    }
+    .backdrop{
+        height: 100%;
+    }
+    .tabs-md .tab-button-text,.tabs-ios .tab-button-text{
+        font-size: 1.3rem;
+    }
+}   

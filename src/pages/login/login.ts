@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Platform, NavController, NavParams, MenuController } from 'ionic-angular';
 import { Home } from '../home/home';
+import { Landing } from '../landing/landing';
 import { AsDbservice } from '../../providers/as-dbservice';
 
 /**
@@ -16,7 +17,7 @@ import { AsDbservice } from '../../providers/as-dbservice';
 export class Login {
   home:any = Home;
   matchDetails : any;
-  liveDetails = "Live stream will appear here";
+  liveDetails = "Updates will appear here";
   matchData:any;
   item:any;
   error: any;
@@ -42,30 +43,30 @@ export class Login {
   }        
   ionViewDidLoad() {
   }
-  // tapEvent(e) {
-  //   this.tap++
-  //   if(this.tap == 5)
-  //   {
-  //     this.navCtrl.push(Landing);
-  //   }
-  // }
+  tapEvent(e) {
+    this.tap++
+    if(this.tap == 5)
+    {
+      this.navCtrl.push(Landing);
+    }
+  }
   pageNav(m)
   {
     let data='';
     if(m =='h')
     {
-      data='Home Work';
+      data='uHome Work';
     }
     else if(m =='e')
     {
-      data='Events';
+      data='uEvents';
     }
     else if(m =='n')
     {
-      data='News';
+      data='uNews';
     }
     else{
-      data='Feedback';
+      data='FeedbackForm';
     }
     console.log(data);
     this.navCtrl.push(Home,{data:data})

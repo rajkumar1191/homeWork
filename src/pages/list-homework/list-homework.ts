@@ -11,7 +11,7 @@ declare var Connection: any;
     templateUrl: 'list-homework.html',
 })
 export class ListHomework {
-    presetForm: FormGroup;
+    feedbacForm: FormGroup;
     backdrop = true;
     data = [];
     shownGroup = null;
@@ -23,30 +23,27 @@ export class ListHomework {
     error: any;
     date: any;
     selectedDate = '';
+    homeworkArray = [];
+    newsArray = [];
+    eventsArray = [];
+    feedbackArray = [];
+    todaysDate ='';
     constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public menuCtrl: MenuController, public loadingCtrl: LoadingController, private platform: Platform, public toastCtrl: ToastController, public formBuilder: FormBuilder) {
         this.data = navParams.data;
         //  this.menuCtrl.enable(false);
-        this.checkNetwork();
         this.date = new Date().toISOString();
-        var dateParts = this.date.split("T");
+        let dateParts = this.date.split("T");
+        console.log(dateParts[0])
+        this.todaysDate = dateParts[0];
         var dateParts1 = dateParts[0].split("-");
         this.selectedDate = dateParts1[2] + '/' + dateParts1[1] + '/' + dateParts1[0].slice(-2);
-        this.presetForm = new FormGroup(
-            {
-                rowid: new FormControl(),
-                irfp: new FormControl(),
-                loanType: new FormControl('Fixed'),
-                buyDown: new FormControl(false),
-                propState: new FormControl(),
-                propType: new FormControl(),
-                nonTradeCredit: new FormControl(false),
-                noOfUnits: new FormControl(),
-                lenderMP: new FormControl(),
-                underWriting: new FormControl('Automated Underwriting System'),
-                auSystem: new FormControl('DesktopUnderwriter'),
-                auResponse: new FormControl('ApproveEligible'),
-                presetName: new FormControl('', [<any>Validators.required, <any>Validators.maxLength(30)])
-            });
+        this.feedbacForm = new FormGroup(
+        {
+            rowid: new FormControl(),
+            dateSelect: new FormControl(),
+            feedTitle: new FormControl(),
+            descrip: new FormControl('', [<any>Validators.required])
+        });
     }
     loading = this.loadingCtrl.create({
         content: 'Loading'
@@ -62,87 +59,51 @@ export class ListHomework {
     ngOnDestroy() {
         
     }
+    submitNews() {
+        let feedbackInsertData = {};
+        feedbackInsertData['dateSelect'] = this.feedbacForm.controls['dateSelect'].value;
+        feedbackInsertData['feedTitle'] = this.feedbacForm.controls['feedTitle'].value;
+        feedbackInsertData['descrip'] = this.feedbacForm.controls['descrip'].value;
 
-    checkNetwork() {
-        this.platform.ready().then(() => {
-            var networkState = navigator.connection.type;
-            var states = {};
-            states[Connection.UNKNOWN] = 'Unknown connection';
-            states[Connection.ETHERNET] = 'Ethernet connection';
-            states[Connection.WIFI] = 'WiFi connection';
-            states[Connection.CELL_2G] = 'Cell 2G connection';
-            states[Connection.CELL_3G] = 'Cell 3G connection';
-            states[Connection.CELL_4G] = 'Cell 4G connection';
-            states[Connection.CELL] = 'Cell generic connection';
-            states[Connection.NONE] = 'No network connection';
-            if (networkState == 'none') {
-                let toast = this.toastCtrl.create({
-                    message: 'Please check your Network Settings',
-                    duration: 3000,
-                    position: 'bottom'
-                });
-                toast.present();
-            }
-        });
+        if(this.feedbacForm.controls['dateSelect'].status == 'valid' && this.feedbacForm.controls['feedTitle'].status == 'valid' && this.feedbacForm.controls['descrip'].status == 'valid')
+        {
+            let toast = this.toastCtrl.create({
+                message: 'Send Successfully',
+                duration: 3000,
+                position: 'bottom'
+            });
+            toast.present();
+        }
+        //this.homeWorkArray.push(homeworkInsertData);
+        //console.log(JSON.stringify(this.homeWorkArray));
+        
+        // this.asDbservice.addHomework(homeworkInsertData).then((messageDetails) => {
+        //    console.log(messageDetails);
+        //}, (error) => {
+        //    console.log(error);            
+        // });
     }
     ionViewDidLoad() {
-        // this.storage.get('matchResultDetailsResponse').then((matchResultDetailsResponse) => {
-        //     this.matchDateDetails = matchResultDetailsResponse; 
-
-        //     this.loading.dismiss();
-        //             this.storage.ready().then(() => {
-        //                 let updatedMatches;
-        //                 this.storage.get('matchResultDetailsResponse').then((matchResultDetailsResponse) => {
-        //                     if(matchResultDetailsResponse != null)
-        //                     {
-        //                         this.storage.clear().then(() => {
-        //                             updatedMatches = this.matchDateDetails ;
-        //                             this.storage.set('matchResultDetailsResponse', updatedMatches);
-        //                         });
-        //                     }
-        //                 });
-        //             });
-        //             this.storage.set('matchResultDetailsResponse', this.matchDateDetails);
-        //     if(this.matchDateDetails.length > 0)
-        //     {
-        //         this.matchDateDetails = this.matchDateDetails;
-
-        //     }
-        //     else
-        //     {
-        //         this.matchDateDetails = this.matchResultService.matchDateDetails;
-
-        //     }
-        // }),
-        // error => {
-        //       this.errorMessage = <any>error;
-        //       this.error = "Internal error, please try after sometime";
-        //       this.loading.dismiss();
-        //   };
-
-
-        // this.storage.get('matchResultDetailsResponse').then((matchResultDetailsResponse) => {
-        //     this.matchDateDetails =  matchResultDetailsResponse;
-        //     this.loading.dismiss();
-        //     if((this.matchDateDetails.BadmintonApp != undefined) || (this.matchDateDetails.BadmintonApp != null))
-        //       {
-        //         this.matchDateDetails = this.matchResultService.matchDateDetails;
-        //       }
-        //       else if(this.matchDateDetails.length > 0)
-        //       {
-        //           this.matchDateDetails = this.matchDateDetails;
-        //       }
-        //       else
-        //       {
-        //             this.matchDateDetails = this.matchResultService.matchDateDetails;
-        //       }
-
-        // }),
-        // error => {
-        //       this.errorMessage = <any>error;
-        //       this.error = "Internal error, please try after sometime";
-        //       this.loading.dismiss();
-        //   };
+         this.homeworkArray = [
+            {"dateSelect":this.selectedDate,"className":"I","staffName":"Naveen","subjectName":"English","descrip":"Write A-Z 2 times"},
+            {"dateSelect":this.selectedDate,"className":"I","staffName":"Raj","subjectName":"Science","descrip":"Study for tomorrow test"},
+            {"dateSelect":this.selectedDate,"className":"I","staffName":"Surya","subjectName":"Maths","descrip":"Study for tomorrow test"},
+            {"dateSelect":this.selectedDate,"className":"II","staffName":"Surya","subjectName":"Social","descrip":"Study for tomorrow test"}
+        ];
+        this.newsArray = [
+            {"dateSelect":this.selectedDate,"newsTitle":"Internal Exam","descrip":"Internal exam starts on 30-08-2017"},
+            {"dateSelect":this.selectedDate,"newsTitle":"Remainder","descrip":"Gendle remainder to pay fees"},
+            {"dateSelect":this.selectedDate,"newsTitle":"Social","descrip":"Study for tomorrow test"}
+        ];
+        this.eventsArray = [
+            {"startDate":this.selectedDate,"endDate":this.selectedDate,"eventTitle":"Workshop","descrip":"One day work shop for 12th students"},
+            {"startDate":this.selectedDate,"endDate":this.selectedDate,"eventTitle":"Tour","descrip":"One day outing for 7th students"},
+        ];
+        this.feedbackArray = [
+            {"dateSelect":this.selectedDate,"title":"Homework","descrip":"Please give less homework"},
+            {"dateSelect":this.selectedDate,"title":"Facility","descrip":"Cab not coming at correct time"},
+            {"dateSelect":this.selectedDate,"title":"Fees Details","descrip":"Need proper information about fees details"}
+        ];
     }
     toggleGroup(group) {
         if (this.isGroupShown(group)) {

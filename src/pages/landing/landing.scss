@@ -1,64 +1,102 @@
 page-landing {
-    .content-md{
-        background: #5199E2;
+    .background-gradient{
+        // background: url('../assets/img/badminton1.png') no-repeat;
+        background-size: cover;
     }
-    .scroll-content {
-      background-color: #5199E2;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
+    .scroll-content{
+    //  background: url('../assets/img/badminton1.png') no-repeat;
+        background-size: cover;
+}
+    .banner{
+        position: relative;
+        img{
+            // position: relative;
+        }
+
+    }
+    .liveText{
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        background: rgba(0,0,0,0.3);
+        color: #fff;
+        left: 0;
+    }
+    h2{
+        font-size: 1.6rem;
+        font-weight: 400;
+        text-transform: capitalize;
+        padding-left:10px; 
+    }
+    .backIcon{
+        display: none;
+    }
+    h6{
+        margin: 0;
+        font-size: 1.2rem;
+        color:#fff;
+        padding-right: 10px;
+        padding-bottom: 5px;
+    }
+    .item-md, .item-ios{
+        &.homework{
+        background: url('../assets/img/homework.png') no-repeat;
+        background-size: cover;
+        }
+        &.events{
+        background: url('../assets/img/events.png') no-repeat;
+        background-size: cover;
+        }
+        &.news{
+        background: url('../assets/img/news.png') no-repeat;
+        background-size: cover;
+        }
+        &.feedback{
+        background: url('../assets/img/feedback.png') no-repeat;
+        background-size: cover;
+        }
+    }
+   .listPadding{
+    //    padding: 10px;
+   }
+    ion-app.md [padding], ion-app.md [padding] .scroll-content, ion-app.ios [padding], ion-app.ios [padding] .scroll-content{
+        margin: 0 0 5px;
+    }
+    .item-md,.item-ios {
+        font-size: 1.6rem;
+        font-weight: bolder;
+        color: #fff;
+        background-color: rgba(0,0,0,0.4);
+        margin: 5px 0 5px;
     }
  
-    img {
-      width: 50%;
-      height: auto;
-      margin: 0 auto;
+    h1{
+        font-size: 1.8em
     }
- 
-    #cloud-layer {
-    //   background-image: url(../assets/img/racket.png);
-    //   background-size: cover;
-      width: 100%;
-      height: 100%;
-    }
- 
-      ion-row {
-        align-items: center;
+    ion-card {
+        position: relative;
         text-align: center;
-      }
- 
-      ion-item {
-          border-radius: 30px !important;
-          padding-left: 10px !important;
-          margin-bottom: 10px;
-          background-color: #f6f6f6;
-          opacity: 0.7;
-          font-size: 0.9em;
-      }
- 
-      ion-list {
-          margin: 0;
-      }
- 
-      .login-button {
-          width: 100%;
-          border-radius: 30px;
-          font-size: 0.9em;
-          border: 1px solid #fff;
-          background-color: #39acdc;
-      }
-      .cork{
-          height: 103px;
-        width: 20%;
-        right:-60px;
-            position: absolute;
-          -ms-transform: rotate(90deg); /* IE 9 */
-        -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
-        transform: rotate(90deg);
-      }
-      .powered{
-          font-size: 1.2em;
-          font-weight: bold;
-          color:#fff;
-      }
+    }
+
+  .card-title {
+    position: absolute;
+    top: 36%;
+    font-size: 2.0em;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+    background: rgba(0,0,0, 0.8)
+ }
+  .card-subtitle {
+    font-size: 1.0em;
+    position: absolute;
+    top: 52%;
+    width: 100%;
+    color: #fff;
+  }
+  .imgOpa{
+    //   opacity: 0.6;
+      max-height: 160px;
+      height: auto;
+  }
 }
