@@ -11,6 +11,7 @@ import { IonicNativePlugin } from '@ionic-native/core';
 import { AddHomework } from '../pages/add-homework/add-homework';
 import { Landing } from '../pages/landing/landing';
 import { ListHomework } from '../pages/list-homework/list-homework';
+import { ModalPage } from '../pages/modal/modal';
 import { MatchService } from '../pages/home/home.service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -26,7 +27,8 @@ import { AsDbservice } from '../providers/as-dbservice';
     Login,
     AddHomework,
     Landing,
-    ListHomework
+    ListHomework,
+    ModalPage
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ import { AsDbservice } from '../providers/as-dbservice';
     Login,
     AddHomework,
     Landing,
-    ListHomework
+    ListHomework,
+    ModalPage
   ],
   providers: [
     StatusBar,

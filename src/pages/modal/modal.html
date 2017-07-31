@@ -42,10 +42,11 @@
                 <ion-label stacked>Homework</ion-label>
                 <ion-textarea type="text" formControlName="descrip"></ion-textarea>
             </ion-item>
+            <ion-input type="hidden" formControlName="rowid"></ion-input>
             <ion-item>
                 <button type="submit" class="footerBtn right submit" ion-button icon-right full (click)="submit();">
-            SUBMIT
-        </button>
+                    SUBMIT
+                </button>
             </ion-item>
         </ion-list>
     </form>

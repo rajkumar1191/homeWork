@@ -1,19 +1,18 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController, LoadingController, Platform, ToastController } from 'ionic-angular';
+import { NavController, NavParams, MenuController, LoadingController, Platform, ToastController, ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AsDbservice } from '../../providers/as-dbservice';
 import { ModalController } from 'ionic-angular';
-import { ModalPage } from '../modal/modal';
 
 declare var navigator: any;
 declare var Connection: any;
 
 @Component({
-    selector: 'page-list-homework',
-    templateUrl: 'list-homework.html',
+    selector: 'page-modal',
+    templateUrl: 'modal.html',
 })
-export class ListHomework {
+export class ModalPage {
     feedbacForm: FormGroup;
     backdrop = true;
     data = [];
@@ -30,10 +29,15 @@ export class ListHomework {
     newsArray = [];
     eventsArray = [];
     feedbackArray = [];
+    homeworkForm: FormGroup;
+    eventsForm: FormGroup;
+    newsForm: FormGroup;
     todaysDate ='';
-    constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public menuCtrl: MenuController, public loadingCtrl: LoadingController, private platform: Platform, public toastCtrl: ToastController, public formBuilder: FormBuilder, public asDbservice: AsDbservice, public modalCtrl: ModalController) {
-        this.data = navParams.data;
-       
+    editData:any;
+    constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public menuCtrl: MenuController, public loadingCtrl: LoadingController, private platform: Platform, public toastCtrl: ToastController, public formBuilder: FormBuilder, public asDbservice: AsDbservice, public modalCtrl: ModalController, public viewCtrl: ViewController) {
+        this.data = navParams.get('data');
+        this.editData = navParams.data.editArrayData;
+        console.log(this.editData);
         //  this.menuCtrl.enable(false);
         this.date = new Date().toISOString();
         let dateParts = this.date.split("T");
@@ -41,11 +45,34 @@ export class ListHomework {
         this.todaysDate = dateParts[0];
         var dateParts1 = dateParts[0].split("-");
         this.selectedDate = dateParts1[2] + '/' + dateParts1[1] + '/' + dateParts1[0].slice(-2);
-        this.feedbacForm = new FormGroup(
+        this.homeworkForm = new FormGroup(
         {
             rowid: new FormControl(),
             dateSelect: new FormControl(),
-            feedTitle: new FormControl(),
+            endDateSelect: new FormControl(),
+            className: new FormControl(),
+            subjectName: new FormControl(),
+            descrip: new FormControl('', [<any>Validators.required])
+        });
+        this.homeworkForm.get("dateSelect").setValue(this.editData.startDate, { onlySelf: true, emitEvent: false });
+        this.homeworkForm.get("endDateSelect").setValue(this.editData.endDate, { onlySelf: true, emitEvent: false });
+        this.homeworkForm.get("className").setValue(this.editData.class, { onlySelf: true, emitEvent: false });
+        this.homeworkForm.get("subjectName").setValue(this.editData.subject, { onlySelf: true, emitEvent: false });
+        this.homeworkForm.get("descrip").setValue(this.editData.descrip, { onlySelf: true, emitEvent: false });
+        this.homeworkForm.get("rowid").setValue(this.editData.rowid, { onlySelf: true, emitEvent: false });
+        this.eventsForm = new FormGroup(
+        {
+            rowid: new FormControl(),
+            startDate: new FormControl(dateParts[0]),
+            endDate: new FormControl(dateParts[0]),
+            eventTitle: new FormControl(),
+            descrip: new FormControl('', [<any>Validators.required])
+        });
+        this.newsForm = new FormGroup(
+        {
+            rowid: new FormControl(),
+            dateSelect: new FormControl(dateParts[0]),
+            newsTitle: new FormControl(),
             descrip: new FormControl('', [<any>Validators.required])
         });
     }
@@ -102,6 +129,28 @@ export class ListHomework {
             {"dateSelect":this.selectedDate,"title":"Fees Details","descrip":"Need proper information about fees details"}
         ];
     }
+    submit() {
+        let homeworkUpdateData = {};
+        homeworkUpdateData['dateSelect'] = this.homeworkForm.controls['dateSelect'].value;
+        homeworkUpdateData['endDateSelect'] = this.homeworkForm.controls['endDateSelect'].value;
+        homeworkUpdateData['className'] = this.homeworkForm.controls['className'].value;
+        homeworkUpdateData['subjectName'] = this.homeworkForm.controls['subjectName'].value;
+        homeworkUpdateData['descrip'] = this.homeworkForm.controls['descrip'].value;
+        homeworkUpdateData['rowid'] = this.homeworkForm.controls['rowid'].value;
+
+        this.asDbservice.updateHomework(homeworkUpdateData).then((messageDetails) => {
+           console.log(messageDetails);
+            let toast = this.toastCtrl.create({
+                    message: 'Updated Successfully',
+                    duration: 3000,
+                    position: 'bottom'
+                });
+                toast.present();
+           this.viewCtrl.dismiss();                
+        }, (error) => {
+           console.log(error);            
+        });
+    }
     viewWillEnter(){
         this.asDbservice.getHomework().then((messageDetails) => {
             this.homeworkArray = [];
@@ -120,15 +169,5 @@ export class ListHomework {
     }
     isGroupShown(group) {
         return this.shownGroup === group;
-    }
-    editData(data,data1){
-        let arrayData = this.homeworkArray[0][data];
-        console.log(arrayData);
-        let modal = this.modalCtrl.create(ModalPage,{data:this.data, editArrayData: arrayData});
-        modal.present();
-        console.log(data);
-    }
-    deleteData(data,data1){
-        console.log(data);
     }
 }

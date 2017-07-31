@@ -42,24 +42,24 @@ export class AddHomework {
         this.homeworkForm = new FormGroup(
             {
                 rowid: new FormControl(),
-                dateSelect: new FormControl(),
-                className: new FormControl('Fixed'),
-                staffName: new FormControl(false),
+                dateSelect: new FormControl(dateParts[0]),
+                endDateSelect: new FormControl(dateParts[0]),
+                className: new FormControl('I'),
                 subjectName: new FormControl(),
                 descrip: new FormControl('', [<any>Validators.required])
             });
             this.eventsForm = new FormGroup(
             {
                 rowid: new FormControl(),
-                startDate: new FormControl(),
-                endDate: new FormControl(),
+                startDate: new FormControl(dateParts[0]),
+                endDate: new FormControl(dateParts[0]),
                 eventTitle: new FormControl(),
                 descrip: new FormControl('', [<any>Validators.required])
             });
             this.newsForm = new FormGroup(
             {
                 rowid: new FormControl(),
-                dateSelect: new FormControl(),
+                dateSelect: new FormControl(dateParts[0]),
                 newsTitle: new FormControl(),
                 descrip: new FormControl('', [<any>Validators.required])
             });
@@ -81,29 +81,35 @@ export class AddHomework {
     submit() {
         let homeworkInsertData = {};
         homeworkInsertData['dateSelect'] = this.homeworkForm.controls['dateSelect'].value;
+        homeworkInsertData['endDateSelect'] = this.homeworkForm.controls['endDateSelect'].value;
         homeworkInsertData['className'] = this.homeworkForm.controls['className'].value;
-        homeworkInsertData['staffName'] = this.homeworkForm.controls['staffName'].value;
         homeworkInsertData['subjectName'] = this.homeworkForm.controls['subjectName'].value;
         homeworkInsertData['descrip'] = this.homeworkForm.controls['descrip'].value;
 
 
 
-         if(this.homeworkForm.controls['dateSelect'].status == 'valid' && this.homeworkForm.controls['className'].status == 'valid' && this.homeworkForm.controls['staffName'].status == 'valid' && this.homeworkForm.controls['subjectName'].status == 'valid' && this.homeworkForm.controls['descrip'].status == 'valid')
-        {
-            //this.homeWorkArray.push(homeworkInsertData);
-            //console.log(JSON.stringify(this.homeWorkArray));
-            let toast = this.toastCtrl.create({
+        //  if(this.homeworkForm.controls['dateSelect'].status == 'valid' && this.homeworkForm.controls['className'].status == 'valid' && this.homeworkForm.controls['staffName'].status == 'valid' && this.homeworkForm.controls['subjectName'].status == 'valid' && this.homeworkForm.controls['descrip'].status == 'valid')
+        // {
+        //     //this.homeWorkArray.push(homeworkInsertData);
+        //     //console.log(JSON.stringify(this.homeWorkArray));
+        //     let toast = this.toastCtrl.create({
+        //         message: 'Added Successfully',
+        //         duration: 3000,
+        //         position: 'bottom'
+        //     });
+        //     toast.present();
+        // }
+        this.asDbservice.addHomework(homeworkInsertData).then((messageDetails) => {
+           console.log(messageDetails);
+           let toast = this.toastCtrl.create({
                 message: 'Added Successfully',
                 duration: 3000,
                 position: 'bottom'
             });
             toast.present();
-        }
-        // this.asDbservice.addHomework(homeworkInsertData).then((messageDetails) => {
-        //    console.log(messageDetails);
-        //}, (error) => {
-        //    console.log(error);            
-        // });
+        }, (error) => {
+           console.log(error);            
+        });
     }
     submitNews() {
         let newsInsertData = {};

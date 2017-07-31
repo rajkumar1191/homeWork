@@ -35,7 +35,7 @@ export class AsDbservice {
     public initializeDataService() {
         this.platform.ready().then(() => {
             this.schoolDb.openDatabase({ name: "schoolDb", location: "default" }).then(() => {
-                this.schoolDb.executeSql('CREATE TABLE IF NOT EXISTS homework (effectiveDate VARCHAR, subject VARCHAR, staff VARCHAR, class VARCHAR, descrip VARCHAR, updatedOn INTEGER)', {}).then((data) => {
+                this.schoolDb.executeSql('CREATE TABLE IF NOT EXISTS homeworkTbl (startDate VARCHAR, subject VARCHAR, endDate VARCHAR, class VARCHAR, descrip VARCHAR, updatedOn INTEGER)', {}).then((data) => {
                     // this.deleteHomework();
                     this.getHomework();
                 }, (error) => {
@@ -49,11 +49,11 @@ export class AsDbservice {
     getHomeworkID() {
         return new Promise((resolve, reject) => {
             this.schoolDb.openDatabase({ name: "schoolDb", location: "default" }).then(() => {
-                this.schoolDb.executeSql("SELECT rowid,* FROM homework ORDER BY updatedOn DESC ", []).then((data) => {
+                this.schoolDb.executeSql("SELECT rowid,* FROM homeworkTbl ORDER BY updatedOn DESC ", []).then((data) => {
                     let messageID = [];
                     if (data.rows.length > 0) {
                         for (let i = 0; i < data.rows.length; i++) {
-                            messageID.push(data.rows.item(i).effectiveDate);
+                            messageID.push(data.rows.item(i).startDate);
                         }
                     }
                     resolve(messageID);
@@ -67,23 +67,18 @@ export class AsDbservice {
     }
 
     getHomework() {
-        return new Promise((resolve, reject) => {
-            this.schoolDb.openDatabase({ name: "schoolDb", location: "default" }).then(() => {
-                this.schoolDb.executeSql("SELECT rowid,* FROM homework ORDER BY updatedOn DESC LIMIT 10", []).then((data) => {
+        return new Promise((resolve, reject) => { 
+                this.schoolDb.executeSql("SELECT rowid,* FROM homeworkTbl ORDER BY updatedOn DESC", []).then((data) => {
                     let messageDetails = [];
                     if (data.rows.length > 0) {
                         for (let i = 0; i < data.rows.length; i++) {
-                            //console.log(date);
-                            messageDetails.push({ effectiveDate: data.rows.item(i).effectiveDate, subject: data.rows.item(i).subject, staff: data.rows.item(i).staff, class: data.rows.item(i).class, descrip: data.rows.item(i).descrip, rowid: data.rows.item(i).rowid });
+                            messageDetails.push({ startDate: data.rows.item(i).startDate, subject: data.rows.item(i).subject, endDate: data.rows.item(i).endDate, class: data.rows.item(i).class, descrip: data.rows.item(i).descrip, rowid: data.rows.item(i).rowid });
                         }
                     }
                     resolve(messageDetails);
                 }, (error) => {
                     reject(error);
                 });
-            }, (error) => {
-
-            });
         });
     }
 
@@ -91,12 +86,12 @@ export class AsDbservice {
         this.dateTime = new Date();
         this.dateTime = this.dateTime.getTime();
         return new Promise((resolve, reject) => {
-            this.schoolDb.executeSql("INSERT INTO homework (effectiveDate, subject, staff, class, descrip, updatedOn) VALUES ('" + data.dateSelect + "','" + data.className + "','" + data.staffName + "','" + data.subjectName + "','" + data.descrip + "','" + this.dateTime + "')", []).then((data) => {
+            this.schoolDb.executeSql("INSERT INTO homeworkTbl (startDate, subject, endDate, class, descrip, updatedOn) VALUES ('" + data.dateSelect + "','" + data.subjectName + "','" + data.endDateSelect + "','" + data.className + "','" + data.descrip + "','" + this.dateTime + "')", []).then((data) => {
                 let messageDetails = [];
-                this.schoolDb.executeSql("SELECT rowid,* FROM homework ORDER BY updatedOn DESC LIMIT 10", []).then((data) => {
+                this.schoolDb.executeSql("SELECT rowid,* FROM homeworkTbl ORDER BY updatedOn DESC", []).then((data) => {
                     if (data.rows.length > 0) {
                         for (let i = 0; i < data.rows.length; i++) {
-                            messageDetails.push({ effectiveDate: data.rows.item(i).effectiveDate, subject: data.rows.item(i).subject, staff: data.rows.item(i).staff, class: data.rows.item(i).class, descrip: data.rows.item(i).descrip, rowid: data.rows.item(i).rowid });
+                            messageDetails.push({ startDate: data.rows.item(i).startDate, subject: data.rows.item(i).subject, endDate: data.rows.item(i).endDate, class: data.rows.item(i).class, descrip: data.rows.item(i).descrip, rowid: data.rows.item(i).rowid });
                         }
                     }
                 });
@@ -107,24 +102,27 @@ export class AsDbservice {
         });
     }
 
-    updateHomework(data) {
-        return new Promise((resolve, reject) => {
-            this.schoolDb.openDatabase({ name: "schoolDb", location: "default" }).then(() => {
-                this.schoolDb.executeSql("UPDATE homework SET status = 'READ'  where rowid = '" + data + "'", []).then((data) => {
-                    resolve(data);
-                }, (error) => {
-                    reject(error);
-                });
+    updateHomework(data) 
+    {
+        this.dateTime = new Date();
+        this.dateTime = this.dateTime.getTime();
+        return new Promise((resolve, reject) => 
+        {
+            this.schoolDb.executeSql( "UPDATE homeworkTbl SET startDate = '"+data.dateSelect+"', subject = '"+data.subjectName+"', endDate = '"+data.endDateSelect+"', class = '"+data.className+"', descrip = '"+data.descrip+"', updatedOn = '"+this.dateTime+"' where rowid = '"+data.rowid+"'", []).then((data) => 
+            {
+                let presetResult="Updated Successfully";
+                
+                resolve(presetResult);
             }, (error) => {
-
+                reject(error);
+                 
             });
         });
-
     }
 
     deleteHomework() {
         this.schoolDb.openDatabase({ name: "schoolDb", location: "default" }).then(() => {
-            this.schoolDb.executeSql("DELETE FROM homework", {}).then((data) => {
+            this.schoolDb.executeSql("DELETE FROM homeworkTbl", {}).then((data) => {
             }, (error) => {
             });
         }, (error) => {

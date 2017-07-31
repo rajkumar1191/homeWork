@@ -8,13 +8,13 @@
 </ion-header>
 <ion-content no-padding class="background-gradient">
     <ion-list *ngIf="data=='Home Work'">
-      <ion-item-sliding *ngFor="let data of homeworkArray">
+      <ion-item-sliding *ngFor="let data of homeworkArray[0] let i=index">
         <ion-item>
           <ion-grid>
             <ion-row>
-              <ion-col col-4 class="dateClass">{{data.dateSelect}}</ion-col>
-              <ion-col col-4 class="subjectClass">{{data.subjectName}}</ion-col>
-              <ion-col col-4 class="dateClass">Class - {{data.className}}</ion-col>
+              <ion-col col-4 class="dateClass">{{data.startDate}}</ion-col>
+              <ion-col col-4 class="subjectClass">{{data.subject}}</ion-col>
+              <ion-col col-4 class="subjectClass">{{data.endDate}}</ion-col>
             </ion-row>
             <ion-row>
               <ion-col col-12>{{data.descrip}}</ion-col>
@@ -22,7 +22,11 @@
           </ion-grid>
         </ion-item>
         <ion-item-options side="right">
-          <button ion-button color="primary">
+           <button ion-button color="primary" (click)="editData(i,data.rowid)">
+            <ion-icon name="create"></ion-icon>
+            Edit
+          </button>
+          <button ion-button color="danger" (click)="deleteData(i,data.rowid)">
             <ion-icon name="trash"></ion-icon>
             Delete
           </button>
