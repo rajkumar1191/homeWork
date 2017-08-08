@@ -15,7 +15,7 @@ declare var Connection: any;
 export class ModalPage {
     feedbacForm: FormGroup;
     backdrop = true;
-    data = [];
+    data:any;
     shownGroup = null;
     matchDetails: any;
     matchFixtureDetails: any;
@@ -45,36 +45,54 @@ export class ModalPage {
         this.todaysDate = dateParts[0];
         var dateParts1 = dateParts[0].split("-");
         this.selectedDate = dateParts1[2] + '/' + dateParts1[1] + '/' + dateParts1[0].slice(-2);
-        this.homeworkForm = new FormGroup(
+        if(this.data == 'Home Work')
         {
-            rowid: new FormControl(),
-            dateSelect: new FormControl(),
-            endDateSelect: new FormControl(),
-            className: new FormControl(),
-            subjectName: new FormControl(),
-            descrip: new FormControl('', [<any>Validators.required])
-        });
-        this.homeworkForm.get("dateSelect").setValue(this.editData.startDate, { onlySelf: true, emitEvent: false });
-        this.homeworkForm.get("endDateSelect").setValue(this.editData.endDate, { onlySelf: true, emitEvent: false });
-        this.homeworkForm.get("className").setValue(this.editData.class, { onlySelf: true, emitEvent: false });
-        this.homeworkForm.get("subjectName").setValue(this.editData.subject, { onlySelf: true, emitEvent: false });
-        this.homeworkForm.get("descrip").setValue(this.editData.descrip, { onlySelf: true, emitEvent: false });
-        this.homeworkForm.get("rowid").setValue(this.editData.rowid, { onlySelf: true, emitEvent: false });
-        this.eventsForm = new FormGroup(
+            this.homeworkForm = new FormGroup(
+            {
+                rowid: new FormControl(),
+                dateSelect: new FormControl(dateParts[0]),
+                endDateSelect: new FormControl(dateParts[0]),
+                className: new FormControl('I'),
+                subjectName: new FormControl(),
+                descrip: new FormControl('', [<any>Validators.required])
+            });
+            this.homeworkForm.get("dateSelect").setValue(this.editData.startDate, { onlySelf: true, emitEvent: false });
+            this.homeworkForm.get("endDateSelect").setValue(this.editData.endDate, { onlySelf: true, emitEvent: false });
+            this.homeworkForm.get("className").setValue(this.editData.class, { onlySelf: true, emitEvent: false });
+            this.homeworkForm.get("subjectName").setValue(this.editData.subject, { onlySelf: true, emitEvent: false });
+            this.homeworkForm.get("descrip").setValue(this.editData.descrip, { onlySelf: true, emitEvent: false });
+            this.homeworkForm.get("rowid").setValue(this.editData.rowid, { onlySelf: true, emitEvent: false });
+        }
+        else if(this.data == 'Events')
         {
-            rowid: new FormControl(),
-            startDate: new FormControl(dateParts[0]),
-            endDate: new FormControl(dateParts[0]),
-            eventTitle: new FormControl(),
-            descrip: new FormControl('', [<any>Validators.required])
-        });
-        this.newsForm = new FormGroup(
+            this.eventsForm = new FormGroup(
+            {
+                rowid: new FormControl(),
+                startDate: new FormControl(dateParts[0]),
+                endDate: new FormControl(dateParts[0]),
+                eventTitle: new FormControl(),
+                descrip: new FormControl('', [<any>Validators.required])
+            });
+            this.eventsForm.get("startDate").setValue(this.editData.startDate, { onlySelf: true, emitEvent: false });
+            this.eventsForm.get("endDate").setValue(this.editData.endDate, { onlySelf: true, emitEvent: false });
+            this.eventsForm.get("eventTitle").setValue(this.editData.title, { onlySelf: true, emitEvent: false });
+            this.eventsForm.get("descrip").setValue(this.editData.descrip, { onlySelf: true, emitEvent: false });
+            this.eventsForm.get("rowid").setValue(this.editData.rowid, { onlySelf: true, emitEvent: false });
+        }
+        else if(this.data == 'News')
         {
-            rowid: new FormControl(),
-            dateSelect: new FormControl(dateParts[0]),
-            newsTitle: new FormControl(),
-            descrip: new FormControl('', [<any>Validators.required])
-        });
+            this.newsForm = new FormGroup(
+            {
+                rowid: new FormControl(),
+                dateSelect: new FormControl(dateParts[0]),
+                newsTitle: new FormControl(),
+                descrip: new FormControl('', [<any>Validators.required])
+            });
+            this.newsForm.get("dateSelect").setValue(this.editData.startDate, { onlySelf: true, emitEvent: false });
+            this.newsForm.get("newsTitle").setValue(this.editData.newsTitle, { onlySelf: true, emitEvent: false });
+            this.newsForm.get("descrip").setValue(this.editData.descrip, { onlySelf: true, emitEvent: false });
+            this.newsForm.get("rowid").setValue(this.editData.rowid, { onlySelf: true, emitEvent: false });
+        }
     }
     loading = this.loadingCtrl.create({
         content: 'Loading'
@@ -90,21 +108,12 @@ export class ModalPage {
     ngOnDestroy() {
         
     }
-    submitNews() {
+    submitFeedback() {
         let feedbackInsertData = {};
         feedbackInsertData['dateSelect'] = this.feedbacForm.controls['dateSelect'].value;
         feedbackInsertData['feedTitle'] = this.feedbacForm.controls['feedTitle'].value;
         feedbackInsertData['descrip'] = this.feedbacForm.controls['descrip'].value;
 
-        if(this.feedbacForm.controls['dateSelect'].status == 'valid' && this.feedbacForm.controls['feedTitle'].status == 'valid' && this.feedbacForm.controls['descrip'].status == 'valid')
-        {
-            let toast = this.toastCtrl.create({
-                message: 'Send Successfully',
-                duration: 3000,
-                position: 'bottom'
-            });
-            toast.present();
-        }
     }
     ionViewDidLoad() {
         this.asDbservice.getHomework().then((messageDetails) => {
@@ -129,7 +138,7 @@ export class ModalPage {
             {"dateSelect":this.selectedDate,"title":"Fees Details","descrip":"Need proper information about fees details"}
         ];
     }
-    submit() {
+    submitHomework() {
         let homeworkUpdateData = {};
         homeworkUpdateData['dateSelect'] = this.homeworkForm.controls['dateSelect'].value;
         homeworkUpdateData['endDateSelect'] = this.homeworkForm.controls['endDateSelect'].value;
@@ -151,6 +160,49 @@ export class ModalPage {
            console.log(error);            
         });
     }
+    submitEvent() {
+        let EventUpdateData = {};
+        EventUpdateData['startDate'] = this.eventsForm.controls['startDate'].value;
+        EventUpdateData['endDate'] = this.eventsForm.controls['endDate'].value;
+        EventUpdateData['eventTitle'] = this.eventsForm.controls['eventTitle'].value;
+        EventUpdateData['descrip'] = this.eventsForm.controls['descrip'].value;
+        EventUpdateData['rowid'] = this.eventsForm.controls['rowid'].value;
+
+        this.asDbservice.updateEvents(EventUpdateData).then((messageDetails) => {
+           console.log(messageDetails);
+            let toast = this.toastCtrl.create({
+                    message: 'Updated Successfully',
+                    duration: 3000,
+                    position: 'bottom'
+                });
+                toast.present();
+           this.viewCtrl.dismiss();                
+        }, (error) => {
+           console.log(error);            
+        });
+    }
+
+    submitNews() {
+        let newsUpdateData = {};
+        newsUpdateData['dateSelect'] = this.newsForm.controls['dateSelect'].value;
+        newsUpdateData['newsTitle'] = this.newsForm.controls['newsTitle'].value;
+        newsUpdateData['descrip'] = this.newsForm.controls['descrip'].value;
+        newsUpdateData['rowid'] = this.newsForm.controls['rowid'].value;
+
+        this.asDbservice.updateNews(newsUpdateData).then((messageDetails) => {
+           console.log(messageDetails);
+           let toast = this.toastCtrl.create({
+                message: 'Added Successfully',
+                duration: 3000,
+                position: 'bottom'
+            });
+            toast.present();
+            this.viewCtrl.dismiss();       
+        }, (error) => {
+           console.log(error);            
+        });
+    }
+    
     viewWillEnter(){
         this.asDbservice.getHomework().then((messageDetails) => {
             this.homeworkArray = [];

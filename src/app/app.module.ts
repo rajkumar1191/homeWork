@@ -12,13 +12,16 @@ import { AddHomework } from '../pages/add-homework/add-homework';
 import { Landing } from '../pages/landing/landing';
 import { ListHomework } from '../pages/list-homework/list-homework';
 import { ModalPage } from '../pages/modal/modal';
-import { MatchService } from '../pages/home/home.service';
+import { CalendarModalPage } from '../pages/calendar-modal/calendar-modal';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { AsDbservice } from '../providers/as-dbservice';
+import { NgCalendarModule  } from 'ionic2-calendar';
 
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 @NgModule({
   declarations: [
     MyApp,
@@ -28,7 +31,8 @@ import { AsDbservice } from '../providers/as-dbservice';
     AddHomework,
     Landing,
     ListHomework,
-    ModalPage
+    ModalPage,
+    CalendarModalPage
   ],
   imports: [
     BrowserModule,
@@ -36,6 +40,7 @@ import { AsDbservice } from '../providers/as-dbservice';
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
+    NgCalendarModule,
     IonicModule.forRoot(MyApp,{
       tabsPlacement: 'bottom',
         platforms:  {
@@ -48,8 +53,10 @@ import { AsDbservice } from '../providers/as-dbservice';
           windows:  {
             tabsPlacement:  'top'
           }
-        }
-    }),
+        },    
+        scrollAssist: false,
+        autoFocusAssist: false
+      })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -60,12 +67,12 @@ import { AsDbservice } from '../providers/as-dbservice';
     AddHomework,
     Landing,
     ListHomework,
-    ModalPage
+    ModalPage,
+    CalendarModalPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    MatchService,
     IonicNativePlugin,
     AsDbservice,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

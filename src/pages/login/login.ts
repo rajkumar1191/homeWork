@@ -17,7 +17,7 @@ import { AsDbservice } from '../../providers/as-dbservice';
 export class Login {
   home:any = Home;
   matchDetails : any;
-  liveDetails = "Updates will appear here";
+  liveDetails = "Welcome User !!!";
   matchData:any;
   item:any;
   error: any;
@@ -49,6 +49,9 @@ export class Login {
     {
       this.navCtrl.push(Landing);
     }
+  }
+  viewWillEnter() {
+    this.tap = 0;
   }
   pageNav(m)
   {

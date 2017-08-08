@@ -2,18 +2,7 @@
     <span class="banner" (tap)="tapEvent($event)">
         <img src="assets/img/banner.jpg"/>      
         <span class="liveText">
-            <h2 text-left *ngIf="!splitMode">{{liveDetails}}</h2>
-            <h2 text-left *ngIf="splitMode">
-                    <ion-row>
-                        <ion-col text-left col-10>{{team1}}</ion-col>
-                        <ion-col text-center col-2>{{score1}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col text-left col-10>{{team2}}</ion-col>
-                        <ion-col text-center col-2>{{score2}}</ion-col>
-                    </ion-row>
-            </h2>
-            <h6 text-right><ion-icon name="radio-button-on" color="light"></ion-icon> Live</h6>
+            <h2 text-left>{{liveDetails}}</h2>
         </span>  
     </span>
     
